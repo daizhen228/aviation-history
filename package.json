@@ -1,0 +1,51 @@
+{
+  "name": "aviation_history",
+  "version": "1.0.0",
+  "description": "这是一个展示航空历史上重大事件（如空难、首飞、航空公司成立等）的静态网站。",
+  "main": "electron-main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",
+    "dist": "electron-builder",
+    "android": "npx cap open android",
+    "ios": "npx cap open ios",
+    "sync": "npx cap sync",
+    "serve": "node server.js",
+    "deploy": "gh-pages -d www"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@capacitor/cli": "^8.1.0",
+    "@capacitor/core": "^8.1.0",
+    "electron": "^40.6.0",
+    "electron-builder": "^26.8.1",
+    "gh-pages": "^6.3.0"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.1.0",
+    "@capacitor/ios": "^8.1.0"
+  },
+  "build": {
+    "appId": "com.aviation.history",
+    "productName": "AviationHistory",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "files": [
+      "electron-main.js",
+      "www/**/*"
+    ]
+  }
+}

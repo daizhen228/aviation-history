@@ -1,0 +1,604 @@
+:root {
+    --primary-color: #0056b3;
+    --secondary-color: #f0f4f8;
+    --accent-color: #e63946;
+    --text-color: #333;
+    --bg-color: #ffffff;
+    --card-bg: #ffffff;
+    --timeline-line: #ddd;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Default Background (Day) */
+    background: url('https://images.unsplash.com/photo-1513002749550-c59d786b8e6c?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    transition: background-image 1s ease, color 1s ease;
+}
+
+/* Time-based Backgrounds */
+body.bg-morning {
+    /* Sunrise / Golden Hour */
+    background-image: url('https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=1920&q=80');
+}
+
+body.bg-day {
+    /* Blue Sky with Clouds */
+    background-image: url('https://images.unsplash.com/photo-1513002749550-c59d786b8e6c?auto=format&fit=crop&w=1920&q=80');
+}
+
+body.bg-sunset {
+    /* Sunset / Orange & Purple */
+    background-image: url('https://images.unsplash.com/photo-1495616811223-4d98c6e9c869?auto=format&fit=crop&w=1920&q=80');
+}
+
+body.bg-night {
+    /* Starry Night */
+    background-image: url('https://images.unsplash.com/photo-1472120435266-5310700c309e?auto=format&fit=crop&w=1920&q=80');
+    color: #eee;
+}
+
+/* Adjust header/footer for night mode visibility */
+body.bg-night header {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+}
+
+body.bg-night header h1, body.bg-night header .subtitle {
+    color: #fff;
+}
+
+body.bg-night .calendar-section {
+    background-color: rgba(255, 255, 255, 0.9); /* Keep calendar slightly bright for readability */
+}
+
+body.bg-night footer {
+    color: #ccc;
+}
+
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+header {
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+    color: #003d82;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(5px);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.subtitle {
+    margin-top: 10px;
+    font-size: 1.1rem;
+    opacity: 0.8;
+    font-weight: 300;
+}
+
+/* Calendar Widget Styles */
+.calendar-section {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.calendar-header button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--primary-color);
+    padding: 5px 15px;
+    border-radius: 50%;
+    transition: background 0.2s;
+}
+
+.calendar-header button:hover {
+    background: #f0f7ff;
+}
+
+.calendar-header h2 {
+    margin: 0;
+    color: #333;
+    font-size: 1.4rem;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    text-align: center;
+}
+
+.calendar-day-header {
+    font-weight: bold;
+    color: #888;
+    padding: 10px 0;
+    font-size: 0.9rem;
+}
+
+.calendar-day {
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 1rem;
+    aspect-ratio: 1; /* Keep circular */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.calendar-day:hover:not(.empty) {
+    background-color: #f0f7ff;
+    color: var(--primary-color);
+}
+
+.calendar-day.today {
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.calendar-day.selected {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.calendar-day.empty {
+    cursor: default;
+}
+
+.date-display {
+    text-align: center;
+    margin: 40px 0 20px;
+}
+
+.date-display h2 {
+    font-size: 2rem;
+    color: #003d82;
+    margin-bottom: 10px;
+}
+
+.loading {
+    color: #666;
+    font-style: italic;
+    margin-top: 10px;
+}
+
+/* Latest News Styles */
+.news-section {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 30px 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.news-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 10px;
+}
+
+.news-header h2 {
+    margin: 0;
+    font-size: 1.4rem;
+    color: var(--primary-color);
+}
+
+.news-source {
+    font-size: 0.8rem;
+    color: #666;
+    background: #eee;
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+.news-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 15px;
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+/* Custom Scrollbar for News */
+.news-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.news-container::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 3px;
+}
+
+.news-card {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 12px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+}
+
+.news-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-color: var(--primary-color);
+}
+
+.news-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 0 8px 0;
+    line-height: 1.4;
+}
+
+.news-title a {
+    color: #333;
+    text-decoration: none;
+}
+
+.news-title a:hover {
+    color: var(--primary-color);
+}
+
+.news-meta {
+    font-size: 0.8rem;
+    color: #888;
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.loading-news {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 20px;
+    color: #666;
+    font-style: italic;
+}
+
+.error-news {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 20px;
+    color: #d32f2f;
+    background: #ffebee;
+    border-radius: 4px;
+}
+
+.timeline {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+/* Event Card Layout */
+.event-card {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: auto; /* Allow content to expand */
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* Calendar Leaf Visual */
+.calendar-leaf-visual {
+    background: #fff;
+    border-bottom: 1px solid #eee;
+    height: 180px; /* Increased height for better image visibility */
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.calendar-leaf-visual.has-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.6)); /* Gradient overlay */
+    z-index: 1;
+}
+
+.calendar-leaf-visual:hover {
+    transform: scale(1.02); /* Slight zoom on hover */
+}
+
+.leaf-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+    box-sizing: border-box;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+}
+
+.calendar-leaf-top {
+    height: 35px;
+    background-color: var(--accent-color); /* e.g. Red */
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.1em;
+    letter-spacing: 1px;
+}
+
+.calendar-leaf-top-transparent {
+    font-size: 1em;
+    font-weight: bold;
+    color: white;
+    background-color: rgba(230, 57, 70, 0.9); /* Red with opacity */
+    padding: 2px 8px;
+    border-radius: 4px;
+    align-self: flex-start; /* Left align */
+}
+
+.calendar-leaf-body {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.5em;
+    font-weight: 800;
+    color: #333;
+    font-family: 'Georgia', serif;
+}
+
+.calendar-leaf-body-transparent {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4em;
+    font-weight: 800;
+    color: white;
+    font-family: 'Georgia', serif;
+}
+
+.calendar-leaf-tag {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.85em;
+    font-weight: bold;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    z-index: 3;
+}
+
+/* Event Header (Title Area) */
+.event-header {
+    padding: 15px;
+    background-color: #fff;
+    border-top: 1px solid #f0f0f0;
+    cursor: pointer;
+    flex-grow: 0; /* Don't stretch excessively */
+}
+
+.event-title {
+    margin: 0;
+    font-size: 1.15em;
+    font-weight: 600;
+    color: #333;
+    line-height: 1.4;
+    text-align: center;
+}
+
+.expand-hint {
+    text-align: center;
+    color: #aaa;
+    font-size: 0.8em;
+    margin-top: 8px;
+    transition: color 0.2s;
+}
+
+.event-card:hover .expand-hint {
+    color: var(--primary-color);
+}
+
+/* Content Section (Hidden by default) */
+.event-content {
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-top: 1px solid #eee;
+    font-size: 0.95em;
+    color: #555;
+    display: none; /* Controlled by JS */
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Original Styles to Keep or Modify */
+.event-meta-row {
+    display: none; /* Hide old meta row as we use calendar leaf now */
+}
+
+
+/* Tags */
+.event-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.8em;
+    font-weight: bold;
+    color: white;
+}
+
+.tag-crash { background-color: #d32f2f; }
+.tag-civil { background-color: #ff9800; }
+.tag-founding { background-color: #2196F3; }
+.tag-birth { background-color: #9c27b0; }
+.tag-milestone { background-color: #4caf50; }
+
+/* Description & Links */
+.event-description {
+    font-size: 0.95em;
+    line-height: 1.6;
+    color: #555;
+}
+
+.event-links {
+    margin-top: 10px;
+    font-size: 0.9em;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+}
+
+.event-links a {
+    color: #003d82;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.event-links a:hover {
+    text-decoration: underline;
+}
+
+/* Translate Button */
+.translate-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    margin: 10px 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.translate-btn:hover {
+    background-color: #003d82;
+    color: white; /* Ensure text color stays white */
+}
+
+.translate-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+footer {
+    text-align: center;
+    padding: 40px 0;
+    color: #888;
+    font-size: 0.9rem;
+    margin-top: 40px;
+    border-top: 1px solid #eee;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+    .container {
+        padding: 0 15px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    header {
+        padding: 15px 0;
+    }
+
+    header h1 {
+        font-size: 1.8rem;
+    }
+
+    .subtitle {
+        font-size: 0.9rem;
+    }
+
+    .calendar-grid {
+        gap: 5px;
+    }
+    
+    .calendar-day {
+        padding: 8px;
+        font-size: 0.9rem;
+    }
+
+    .date-display h2 {
+        font-size: 1.5rem;
+    }
+
+    /* Timeline Cards on mobile */
+    .timeline {
+        grid-template-columns: 1fr; /* Force single column on mobile */
+    }
+    
+    .event-card {
+        padding: 15px;
+    }
+    
+    .event-header h3 {
+        font-size: 1.1rem;
+    }
+
+    /* Make buttons easier to tap */
+    button, .translate-btn {
+        min-height: 44px; 
+    }
+}
